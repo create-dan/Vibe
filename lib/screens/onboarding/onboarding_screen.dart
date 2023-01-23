@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:practise_project/screens/nav/nav.dart';
@@ -21,8 +23,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     setState(() => _pageIndex = index);
   }
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  void call() {
+    final User? user = auth.currentUser;
+    print(user?.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
+    call();
     Size size = MediaQuery.of(context).size;
 
     // first, lets create background of screen
