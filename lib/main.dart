@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:practise_project/Auth/login_screen.dart';
+import 'package:practise_project/Auth/signup.dart';
 
 import 'config/colors.dart';
 import 'screens/onboarding/onboarding_screen.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Socially',
       debugShowCheckedModeBanner: false,
       theme: kAppThemeData,
-      home: const LoginScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

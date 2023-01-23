@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:practise_project/Auth/auth_helper.dart';
+import 'package:practise_project/Auth/signup.dart';
 import 'package:practise_project/screens/onboarding/onboarding_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,7 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: "Email",
                     border: OutlineInputBorder(),
                   ),
-                  onSaved: (input) => _email = input!,
+                  onChanged: (input) {
+                    setState(() {
+                      _email = input!;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: 20.0,
@@ -59,7 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     border: OutlineInputBorder(),
                   ),
                   obscureText: true,
-                  onSaved: (input) => _password = input!,
+                  onChanged: (input) {
+                    setState(() {
+                      _password = input!;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: 20.0,
@@ -75,13 +84,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                           .then(
                         (val) {
-                          print(val);
-                          return Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OnboardingScreen(),
-                            ),
-                          );
+                          print(_email);
+                          print(_password);
+
+                          if (val == null) {
+                            return Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OnboardingScreen(),
+                              ),
+                            );
+                          }
                         },
                       );
                     },
@@ -99,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => OnboardingScreen(),
+                        builder: (context) => SignUpScreen(),
                       ),
                     );
                   },
@@ -110,12 +123,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void _submit() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // Perform authentication here
-    }
   }
 }
